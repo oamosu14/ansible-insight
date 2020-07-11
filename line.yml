@@ -1,0 +1,9 @@
+---
+ - hosts: appserver
+   tasks:
+     - name: configure the system to boot on the new kernel
+       lineinfile:
+        path: /boot/grub/grub.conf
+        regexp: '^default='
+        line: 'default=1'
+        backup: yes

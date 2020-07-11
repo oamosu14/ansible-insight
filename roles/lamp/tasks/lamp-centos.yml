@@ -1,0 +1,59 @@
+---
+#  - name: Update yum cache
+#    yum: update_cache=yes
+   - name: Install apache
+     yum: name=httpd state=present
+#  - name: Edit the configuration files
+#    replace:
+#      dest=/etc/httpd/conf.d/welcome.conf
+#      regexp='Directory /usr/share/httpd/noindex'
+#      replace='Directory /var/www/html'
+   - name: Copying the config files for  apache
+     template:
+       src=welcome.conf
+       dest=/etc/httpd/conf.d/welcome.conf
+   - name: New index
+     template:
+       src=index.html
+       dest=/var/www/html/index.html
+   - name: copying  info.php
+     template:
+       src=info.php
+       dest=/var/www/html/info.php
+   - name: Activate Apache modules
+     apache2_module: state=present name=userdir
+   - name: restart  httpd
+     shell: service httpd restart
+   - name: make httpd permamnent
+     shell: chkconfig httpd on
+#   - name: Configure iptables
+#     blockinfile:
+#      dest: /etc/sysconfig/iptables
+#      block: |
+#         iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+#         iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 443 -j ACCEPT
+   - name: Restart  iptables
+     shell: service iptables restart
+#  - name: Edit /etc/shorewall/rules
+#    blockinfile:
+#      dest: /etc/shorewall/rules
+#      block: |
+#        ACCEPT    all    fw    tcp    80,443
+#    notify:
+#      - reiniciando shorewall
+#  - name: Desactivate firealld
+#    shell: systemctl disable firewalld
+#   - name: Install mariadb
+#    yum: name={{ item }} state=present
+#    with_items:
+#         - mariadb-server
+#         - mariadb
+   - name: Install  modulo python-mysqldb
+     yum: name=MySQL-python state=present
+#    notify:
+#      - restart  mariadb
+   - name: Install php
+     yum: name=php state=present
+   - name: Install paquetes php5
+     yum: name=php-mysql
+         state=latest

@@ -1,0 +1,8 @@
+---
+ - hosts: localhost
+   tasks:
+    - name: copy key to aws
+      ec2_key:
+       name: ansible-key
+       key_material: 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA3oLVhHvUaCSxrILOBvveXzGNgwduSrVbQYRYc+N1TcQsLWcSn6sMmYXgtpM91Tr4CBAXCQL4Adp7eTmDuxvqkDSohQVv1gMSt6xF9z6ouhA1AXLW634squIgpZF+RmqgON22Elgqz+lT8MIC+CJ7MAtRucOcmx9Z5XHhhk98ZDz/LMpA9X9o7Mye530ecSL2Z/E+1Zp9MShBCs4+uSxHxm4EP32KRQSSwQlxZqR+Zt9u66KJmmipwknkkjSHQm8uJRzBPZMP2auJbw+ucWIAcGt1NlcnPc+K1Ue/cWO3Fr9uzoxnjiUymeE6K23ft3mqI4h+x3JVMOwbrmTcO9OhCQ== root@localhost.localdomain'
+       state: present

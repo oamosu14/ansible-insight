@@ -1,0 +1,6 @@
+---
+# vars file for kernel
+  kernel_ver: 4.15.1
+  remote_user: root
+  become: yes
+  

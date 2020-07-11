@@ -1,0 +1,18 @@
+---
+- hosts: appserver
+  tasks:
+  - name: Download artifacts from nexus
+    maven_artifact:
+     repository_url: http://108.2.120.247:8081/nexus/service/local/repositories/wscfg-release/content
+     group_id: com-wscfg
+     artifact_id: SOE-wscfg
+     version: 2.000.0-M20180520-01
+     dest: /var/www/html/index.html.jar
+     username: n
+     password: n
+  - name: extract the jar file"
+    unarchive:
+     src: /var/www/html/index.html.jar
+     dest: /var/www/html
+     remote_src: yes
+  
